@@ -36,7 +36,6 @@ module control(
 				ALUSrc   <= 1'b0;
 				RegWrite <= 1'b1;
 			end
-
 			//ADDI
 			6'b001000: begin
 				RegDst   <= 1'b0;
@@ -48,7 +47,6 @@ module control(
 				ALUSrc   <= 1'b0;
 				RegWrite <= 1'b1;
 			end
-
 			///BEQ
 			6'b000100: begin
 				RegDst   <= 1'b0;
@@ -60,7 +58,6 @@ module control(
 				ALUSrc   <= 1'b0;
 				RegWrite <= 1'b0;
 			end
-
 			///BNE
 			6'b000101: begin
 				RegDst   <= 1'bX;
@@ -72,8 +69,6 @@ module control(
 				ALUSrc   <= 1'b0;
 				RegWrite <= 1'b0;
 			end
-
-
 			//LW
 			6'b100011: begin
 				RegDst   <= 1'b1;
@@ -85,7 +80,6 @@ module control(
 				ALUSrc   <= 1'b1;
 				RegWrite <= 1'b1;
 			end
-
 			//SW
 			6'b101011: begin
 				RegDst   <= 0'b1;
@@ -97,7 +91,6 @@ module control(
 				ALUSrc   <= 1'b1;
 				RegWrite <= 1'b0;
 			end
-
 			//SLTI
 			6'b001010: begin
 				RegDst   <= 1'b0;
@@ -109,7 +102,6 @@ module control(
 				ALUSrc   <= 1'b1;
 				RegWrite <= 1'b1;
 			end
-
 			//J
 			6'b000010: begin
 				RegDst   <= 1'bX;
@@ -121,10 +113,6 @@ module control(
 				ALUSrc   <= 1'b0;
 				RegWrite <= 1'b0;
 			end
-
+		endcase
 	end
-
-
-	
-
 endmodule
