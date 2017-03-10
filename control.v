@@ -104,7 +104,7 @@ module control(
 				Branch   <= 1'b0;
 				MemRead  <= 1'b0;
 				MemToReg <= 1'b0;
-				ALUOp    <= 
+				ALUOp    <= 2'b00; //conferir
 				MemWrite <= 1'b1;
 				ALUSrc   <= 1'b1;
 				RegWrite <= 1'b1;
