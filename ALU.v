@@ -15,6 +15,8 @@ input[31:0] entradaB;
 output reg [31:0] ALUsaida;
 output Zero;
 
+assign Zero = (ALUOut==0);
+
 always @(ALUcontrol, entradaA, entradaB)
 	case(ALUcontrol)
 		4'b0000: ALUsaida <= entradaA & entradaB; //AND
