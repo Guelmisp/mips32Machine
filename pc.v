@@ -1,20 +1,17 @@
 module PC(clk, newPC, PC);
 
-parameter DELAY_T = 10;
-parameter MIPS_PC_WIDTH_m1 = 7;
-
 input clk;
-input [MIPS_PC_WIDTH_m1:0] newPC;
-output [MIPS_PC_WIDTH_m1:0] PC;
+input [7:0] newPC;
+output [7:0] PC;
 
-reg [MIPS_PC_WIDTH_m1:0] currPC;
+reg [7:0] currPC;
 
 initial begin
 currPC = 0;
 end
 
 always @(posedge clk) begin
-  #DELAY_T
+  #10
   currPC = newPC;
 end
 

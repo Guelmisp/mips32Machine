@@ -1,27 +1,23 @@
 module RegisterFile(clk, RegWrite, ReadAddr1, ReadAddr2, WriteAddr, ReadData1, ReadData2, WriteData);
-parameter DELAY_T = 10;  
-parameter MIPS_REG_ADDR_W_m1 = 4;
-parameter MIPS_REG_DATA_W_m1 = 31;
-parameter MIPS_REG_NUM_m1 = 31;
 
 input clk, RegWrite;
-input [MIPS_REG_ADDR_W_m1:0] ReadAddr1, ReadAddr2, WriteAddr;
-input [MIPS_REG_DATA_W_m1:0] ReadData1, ReadData2, WriteData;
+input [4:0] ReadAddr1, ReadAddr2, WriteAddr;
+input [31:0] ReadData1, ReadData2, WriteData;
 
-reg [MIPS_REG_DATA_W_m1:0] regs [0:MIPS_REG_NUM_m1];
+reg [31:0] regs [0:31];
 
 integer i;
 
 initial     //initialize all RAM cells to 0 at startup
   begin
-  for (i=0; i <= MIPS_REG_NUM_m1; i = i + 1)
+  for (i=0; i <= 31; i = i + 1)
     regs[i] = 0;
   end
 
 always @(posedge clk) begin
   if (RegWrite == 1'b1)
     begin
-    #DELAY_T
+    #10
     $display($time," writing %m regindex=%b val=%b",WriteAddr,WriteData);
     regs[WriteAddr] = WriteData;
     end
