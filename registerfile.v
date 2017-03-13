@@ -2,7 +2,10 @@ module RegisterFile(clk, RegWrite, ReadAddr1, ReadAddr2, WriteAddr, ReadData1, R
 
 input clk, RegWrite;
 input [4:0] ReadAddr1, ReadAddr2, WriteAddr;
-input [31:0] ReadData1, ReadData2, WriteData;
+input [31:0] WriteData;
+output [31:0] ReadData1;
+output [31:0] ReadData2;
+
 
 reg [31:0] regs [0:31];
 
