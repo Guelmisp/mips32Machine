@@ -1,4 +1,12 @@
-module RegisterFile(clk, RegWrite, ReadAddr1, ReadAddr2, WriteAddr, ReadData1, ReadData2, WriteData);
+module Registers(
+    clk, 
+    RegWrite, 
+    ReadAddr1, 
+    ReadAddr2, 
+    WriteAddr, 
+    ReadData1, 
+    ReadData2, 
+    WriteData);
 
 input clk, RegWrite;
 input [4:0] ReadAddr1, ReadAddr2, WriteAddr;
