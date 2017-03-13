@@ -11,8 +11,8 @@ module multiplex5 (
 
   always @(seletor, entradaA, entradaB)
     if (seletor == 0)
-      out <= entradaA;
+      saida <= entradaA;
     else
-      out <= entradaB;
+      saida<= entradaB;
 
 endmodule
