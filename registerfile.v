@@ -19,17 +19,19 @@ reg [31:0] regs [0:31];
 
 integer i;
 
-initial     //initialize all RAM cells to 0 at startup
+//Inicializando todas as memorias disponiveis
+initial
   begin
   for (i=0; i <= 31; i = i + 1)
     regs[i] = 0;
   end
 
+//Verificando se o bit RegWrite esta ativo para escrever no registrador
 always @(posedge clk) begin
   if (RegWrite == 1'b1)
     begin
     #10
-    $display($time," writing %m regindex=%b val=%b",WriteAddr,WriteData);
+    $display($time,"Escrevendo %m - Registrador=%b |valor=%b",WriteAddr,WriteData);
     regs[WriteAddr] = WriteData;
     end
 end
