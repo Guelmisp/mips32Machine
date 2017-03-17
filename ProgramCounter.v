@@ -23,6 +23,8 @@ module ProgramCounter (
 
 	input [31:0] EntradaPC,
 	input clk,
+	input [31:0] inicioPC,
+	input rst,
 	
 	//Sinais de Controle
 	input Jump,
@@ -38,8 +40,9 @@ module ProgramCounter (
 	output reg [31:0] Proximo
 	);
 
-
-	//Valores Auxiliares
+	always @(posedge rst) begin
+		Proximo = inicioPC;
+	end	
 
 	//Jump PC + 4
 	wire [31:0] JumpShift;
