@@ -73,14 +73,6 @@ module executaTest(inicioPC, test, rst);
 		rst = 0;
 
 		#1 $display("Executando Teste 1 - Resultado: %d\n", test);
-		
-		// Your program 2
-        inicioPC = 14 * 4;
-       #101 rst = 1; 
-       #10000;
-       rst = 0;
-        
-       #1 $display ("Program 2: Result: %d", test);
 	end
 
 endmodule
@@ -103,12 +95,9 @@ module m555 (CLK);
 endmodule
 
 module mainExec;
-
-
     wire [31:0] inicioPC;
     wire [31:0] test;
-    wire rst, CLK;
-    
+    wire rst, CLK;   
     
     m555 system_clock(CLK);
 	executa_tb CU(CLK, rst, inicioPC, test);
