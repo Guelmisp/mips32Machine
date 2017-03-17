@@ -69,7 +69,7 @@ module ProgramCounter (
 		end
 		else begin
 			Proximo = EntradaPC + 32'd4;
-			$display("\nO PC foi incrementado.\n");
+			$display("\nO PC foi incrementado | Valor: %h\n", Proximo);
 		end
 	end
 	
