@@ -61,9 +61,9 @@ module Control(
                     RegDst   <= 1'b0;
                     Branch   <= 1'b1;
                     MemRead  <= 1'b0;
-                    MemToReg <= 0'b1;
+                    MemToReg <= 1'b1;
                     ALUOp    <= 2'b01;
-                    MemWrite <= 0'b1;
+                    MemWrite <= 1'b1;
                     ALUSrc   <= 1'b0;
                     RegWrite <= 1'b0;
                 end
@@ -91,8 +91,8 @@ module Control(
                 end
                 //SW
                 6'b101011: begin
-                    RegDst   <= 0'b1;
-                    Branch   <= 0'b1;
+                    RegDst   <= 1'b1;
+                    Branch   <= 1'b1;
                     MemRead  <= 1'b0;
                     MemToReg <= 1'b0;
                     ALUOp    <= 2'b00;

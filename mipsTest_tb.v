@@ -25,7 +25,7 @@ module executa_tb(clk, rst, inicioPC, Saida);
 	//Modulos a serem utulizados
 	wire SignExtend;
 	wire [31:0] MemData;
-	wire EntradaBranch[31:0];
+	wire [31:0] EntradaBranch;
 	SinaldeExtensao SE1(Instrucao[15:0], EntradaBranch);
 
 
