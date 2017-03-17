@@ -25,13 +25,12 @@ module executa_tb(clk, rst, inicioPC, Saida);
 	//Modulos a serem utulizados
 	wire SignExtend;
 	wire [31:0] MemData;
-	wire [31:0] EntradaBranch;
-	SinaldeExtensao SE1(Instrucao[15:0], EntradaBranch);
-
+	wire [31:0] SaidaExtensao;
+	SinaldeExtensao SE1(Instrucao[15:0], SaidaExtensao);
 
 	wire RegDst, ALUSrc, MemToReg, RegWrite, MemRead, MemWrite, Branch, Jump;
 	
-	ProgramCounter PC1(PC, clk, inicioPC,rst,Jump,Branch,ALUzero,EntradaBranch,Instrucao[25:0],PC);
+	ProgramCounter PC1(PC, clk, inicioPC,rst,Jump,Branch,ALUzero,SaidaExtensao,Instrucao[25:0],PC);
 
 	InstrucMemory IM1(PC, Instrucao);	
 
@@ -49,9 +48,12 @@ module executa_tb(clk, rst, inicioPC, Saida);
 
 	wire [31:0] Read1; wire [31:0] Read2; wire [31:0] Writedata;
 
+	Multiplex MU32_2(Resultado, MemData, MemToReg, Writedata);
+
 	Registers RF1(clk, RegWrite, Instrucao[25:21], Instrucao[20:16], WriteAddr, Read1, Read2, Writedata);
 
-	Multiplex MU32(Read2, EntradaBranch, ALUSrc, ALUentrada);
+	Multiplex MU32(Read2, SaidaExtensao, ALUSrc, ALUentrada);
+
 
 	ALU U01(ALUctrl, Read1, ALUentrada, Resultado, ALUzero);
 
