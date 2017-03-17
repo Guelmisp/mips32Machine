@@ -37,7 +37,7 @@ module executa_tb(clk, rst, inicioPC, Saida);
 
 	wire [1:0] ALUOp;
 
-	Control CU(Instrucao[31:26], RegDst, Branch, MemRead, MemToReg, ALUOp, MemWrite, ALUSrc, RegWrite);
+	Control CU(Instrucao[31:26], RegDst, Branch, MemRead, MemToReg, ALUOp, MemWrite, ALUSrc, RegWrite, Jump);
 
 	wire [3:0] ALUctrl;
 
@@ -73,28 +73,45 @@ module executaTest(inicioPC, test, rst);
 		rst = 0;
 
 		#1 $display("Executando Teste 1 - Resultado: %d\n", test);
+		
+		// Your program 2
+        inicioPC = 14 * 4;
+       #101 rst = 1; 
+       #10000;
+       rst = 0;
+        
+       #1 $display ("Program 2: Result: %d", test);
 	end
 
 endmodule
 
+module m555 (CLK);
+   parameter StartTime = 0, Ton = 50, Toff = 50, Tcc = Ton+Toff; // 
+ 
+   output CLK;
+   reg 	  CLK;
+   
+   initial begin
+      #StartTime CLK = 0;
+   end
+   
+   // The following is correct if clock starts at LOW level at StartTime //
+   always begin
+      #Toff CLK = ~CLK;
+      #Ton CLK = ~CLK;
+   end
+endmodule
+
 module mainExec;
-	
-	//Clock
-	reg osc;
-    initial begin
-        osc = 0;
-    end
-    always begin
-        #100 osc = ~osc;
-    end
-    wire clk;
-    assign clk = osc;
+
 
     wire [31:0] inicioPC;
     wire [31:0] test;
-    wire rst;
-
-	executa_tb CU(clk, rst, inicioPC, test);
+    wire rst, CLK;
+    
+    
+    m555 system_clock(CLK);
+	executa_tb CU(CLK, rst, inicioPC, test);
 	executaTest ET(inicioPC, test, rst);
 
 endmodule
