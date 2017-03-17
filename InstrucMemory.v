@@ -1,4 +1,3 @@
-
 module InstrucMemory(
     input [31:0] Address,
     output reg [31:0] Instruction
@@ -6,6 +5,7 @@ module InstrucMemory(
     
     always @ (Address) begin
         case (Address) 
+        
             //addi $t0, $0, 2  
             //b001000_00000_01000_0000000000000010 R: $t0 = 2  
             32'h00: Instruction = 32'b00100000000010000000000000000010;
@@ -34,3 +34,24 @@ endmodule
 
 //ADDI rt = rs + val
 //ADDI opcode(6) rs(5) rt(5) im(16)
+
+
+//AND rd = rs & rt
+//AND opcode(6) rs(5) rt(5) rd(5) shamt(5) funct(6)
+
+//OR rd = rs | rt
+//OR opcode(6) rs(5) rt(5) rd(5) shamt(5) funct(6)
+
+//BEQ
+
+//BNE
+
+//LW
+
+//SW
+
+//SLT
+
+//SLTI
+
+//J

@@ -28,12 +28,10 @@ initial
 
 //Verificando se o bit RegWrite esta ativo para escrever no registrador
 always @(posedge clk) begin
-  if (RegWrite == 1'b1)
-    begin
-    #10
-    $display($time,"Escrevendo %m - Registrador=%b |valor=%b",WriteAddr,WriteData);
-    regs[WriteAddr] = WriteData;
-    end
+  if (RegWrite == 1) begin
+        $display($time," Escrevendo %m - Registrador=%d |valor=%d",WriteAddr,WriteData);
+        regs[WriteAddr] = WriteData;
+  end
 end
 
 assign ReadData1 = regs[ReadAddr1];
