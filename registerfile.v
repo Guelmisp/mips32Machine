@@ -10,7 +10,7 @@ module Registers(
 
 input clk, RegWrite;
 input [4:0] ReadAddr1, ReadAddr2, WriteAddr;
-input [31:0] WriteData;
+input signed [31:0] WriteData;
 output [31:0] ReadData1;
 output [31:0] ReadData2;
 

@@ -2,12 +2,14 @@
 
 module ALU(
     input [3:0] ALUcontrol,
-    input [31:0] entradaA,
-    input [31:0] entradaB,
+    input signed [31:0] entradaA,
+    input signed [31:0] entradaB,
     output reg [31:0] ALUsaida,
     output wire Zero
     );
- 
+    wire signed [31:0] sub;
+    
+    assign sub = entradaA - entradaB;
     assign Zero = (ALUsaida==0);
     
     always @(ALUcontrol, entradaA, entradaB)
@@ -22,15 +24,20 @@ module ALU(
             end
             4'b0010: begin
                 ALUsaida <= entradaA + entradaB; //Add
-                $display ("\n(ADD) -> Saida ALU: %b", ALUsaida);
+                $display ("\n(ADD) -> Saida ALU: %d", ALUsaida);
             end
             4'b0110: begin
-                ALUsaida <= entradaA - entradaB; //Sub
-                $display ("\n(SUB) -> Saida ALU: %b", ALUsaida);
+                ALUsaida <= sub; //Sub
+                $display ("\n(SUB) -> A= %d,B= %d, A-B: %d", entradaA, entradaB, sub);
             end
             4'b0111: begin
-                ALUsaida <= entradaA < entradaB ? 1:0; //Set on less than (slt)
-                $display ("\n(SLT) -> Saida ALU: %b", ALUsaida);
+                if (entradaA<entradaB) begin
+                    ALUsaida <= 1;
+                end
+                else begin
+                    ALUsaida <= 0;
+                end
+                $display ("\n(SLT/SLTI) -> A: %d, B: %d | (A<B): %d", entradaA, entradaB, (entradaA<entradaB));
             end
             4'b1100: begin
                 ALUsaida <= ~(entradaA | entradaB); //NOR

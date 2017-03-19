@@ -5,53 +5,32 @@ module InstrucMemory(
     
     always @ (Address) begin
         case (Address) 
-        
-            //addi $t0, $0, 2  
-            //b001000_00000_01000_0000000000000010 R: $t0 = 2  
-            32'h00: Instruction = 32'b00100000000010000000000000000010;
             
-            //addi $t1, $t0, 4  
-            //b001000_01000_01001_0000000000000100 R: $t1 = 6
-            32'h04: Instruction = 32'b00100001000010010000000000000100;
-
-            //add $t0, $t1, $t2
-            //b000000_01000_01001_01010_00000_100000 R: $t2 = 8
-            32'h08: Instruction = 32'b00000001000010010101000000100000;
-
+            /*                 
+            add    $2, $0, 1           # $2 = 1
+            sub    $3, $0, $2          # $3 = -1
+            slt    $5, $3, $0          # $5 = 1
+            add    $6, $2, $5          # $6 = 2
+            or     $7, $5, $6          # $7 = 3
+            sub    $8, $5, $7          # $8 = -2
+            and    $9, $8, $7          # $9 = 2
+            sw     $9, 0($a0)          # Store $9 in DMem[0]
+            lw     $9, 0($0)           # Load Final Value
+            nop                        # Complete
+             */
+             32'h00: Instruction = 32'h20020001;
+             32'h04: Instruction = 32'h00021822;
+             32'h08: Instruction = 32'h0060282a;
+             32'h0C: Instruction = 32'h00453020;
+             32'h10: Instruction = 32'h00a63825;
+             32'h14: Instruction = 32'h00a74022;
+             32'h18: Instruction = 32'h01074824;
+             32'h1C: Instruction = 32'hac890000;
+             32'h20: Instruction = 32'h8c090020;
+             32'h24: Instruction = 32'h00000000;
             
             default: Instruction = 32'hXXXXXXXX;
         endcase
     end
     
 endmodule
-
-//Help:
-//$t0 - $t7 (8 - 15);
-
-//ADD opcode(6) rs(5) rt(5) rd(5) shamt(5) funct(6)
-//ADD rd = rs + rt
-
-
-//ADDI rt = rs + val
-//ADDI opcode(6) rs(5) rt(5) im(16)
-
-
-//AND rd = rs & rt
-//AND opcode(6) rs(5) rt(5) rd(5) shamt(5) funct(6)
-
-//OR rd = rs | rt
-//OR opcode(6) rs(5) rt(5) rd(5) shamt(5) funct(6)
-
-//BEQ
-
-//BNE
-
-//LW
-
-//SW
-
-//SLT
-
-//SLTI
-
-//J
